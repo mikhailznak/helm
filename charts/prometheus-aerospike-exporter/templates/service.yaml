@@ -1,15 +1,18 @@
+{{- range $k, $v := .Values.exporter }}
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "prometheus-aerospike-exporter.fullname" . }}
+  name: {{ include "prometheus-aerospike-exporter.fullname" $ }}-{{ $v.name }}
   labels:
-    {{- include "prometheus-aerospike-exporter.labels" . | nindent 4 }}
+    {{- include "prometheus-aerospike-exporter.labels" $ | nindent 4 }}
 spec:
-  type: {{ .Values.service.type | default "ClusterIP"}}
+  type: {{ $.Values.service.type | default "ClusterIP"}}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ $.Values.service.port }}
       targetPort: 9145
       protocol: TCP
-      name: {{ .Values.service.metricsPort.name }}
+      name: {{ $.Values.service.metricsPort.name }}
   selector:
-    {{- include "prometheus-aerospike-exporter.selectorLabels" . | nindent 4 }}
+    {{- include "prometheus-aerospike-exporter.selectorLabels" $ | nindent 4 }}
+{{- end -}}

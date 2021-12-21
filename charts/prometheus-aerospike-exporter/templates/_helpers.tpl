@@ -36,8 +36,6 @@ Common labels
 {{- define "prometheus-aerospike-exporter.labels" -}}
 helm.sh/chart: {{ include "prometheus-aerospike-exporter.chart" . }}
 {{ include "prometheus-aerospike-exporter.selectorLabels" . }}
-release: {{ .Release.Name }}
-app: {{ template "prometheus-aerospike-exporter.name" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}

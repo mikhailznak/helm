@@ -1,12 +1,14 @@
 # Default values for prometheus-aerospike-exporter.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+
 exporter:
-  aerospikeNode: ""
-  aerospikePort: 3000
-  namespaceMetricsAllowlist: ""
-  setMetricsAllowlist: ""
-  nodeMetricsAllowlist: ""
+ - name: "main"
+   aerospikeNode: ""
+   aerospikePort: 3000
+   namespaceMetricsAllowlist: ""
+   setMetricsAllowlist: ""
+   nodeMetricsAllowlist: ""
 
 replicaCount: 1
 
