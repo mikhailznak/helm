@@ -6,11 +6,13 @@ metadata:
   name: {{ include "prometheus-aerospike-exporter.fullname" $ }}-{{ $v.name }}
   labels:
     {{- include "prometheus-aerospike-exporter.labels" $ | nindent 4 }}
+    app: {{ include "prometheus-aerospike-exporter.fullname" $ }}-{{ $v.name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
       {{- include "prometheus-aerospike-exporter.selectorLabels" $ | nindent 6 }}
+      app: {{ include "prometheus-aerospike-exporter.fullname" $ }}-{{ $v.name }}
   template:
     metadata:
       {{- with $.Values.podAnnotations }}
@@ -19,6 +21,7 @@ spec:
       {{- end }}
       labels:
         {{- include "prometheus-aerospike-exporter.selectorLabels" $ | nindent 8 }}
+        app: {{ include "prometheus-aerospike-exporter.fullname" $ }}-{{ $v.name }}
     spec:
       {{- with $.Values.imagePullSecrets }}
       imagePullSecrets:

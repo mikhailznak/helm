@@ -6,6 +6,7 @@ metadata:
   name: {{ include "prometheus-aerospike-exporter.fullname" $ }}-{{ $v.name }}
   labels:
     {{- include "prometheus-aerospike-exporter.labels" $ | nindent 4 }}
+    app: {{ include "prometheus-aerospike-exporter.fullname" $ }}-{{ $v.name }}
 spec:
   type: {{ $.Values.service.type | default "ClusterIP"}}
   ports:
@@ -15,4 +16,5 @@ spec:
       name: {{ $.Values.service.metricsPort.name }}
   selector:
     {{- include "prometheus-aerospike-exporter.selectorLabels" $ | nindent 4 }}
+    app: {{ include "prometheus-aerospike-exporter.fullname" $ }}-{{ $v.name }}
 {{- end -}}

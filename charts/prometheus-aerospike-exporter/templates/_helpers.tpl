@@ -49,7 +49,6 @@ Selector labels
 app.kubernetes.io/name: {{ include "prometheus-aerospike-exporter.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 release: {{ .Release.Name }}
-app: {{ template "prometheus-aerospike-exporter.name" . }}
 {{- end }}
 
 {{/*

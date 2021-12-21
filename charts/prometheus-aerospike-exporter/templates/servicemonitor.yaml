@@ -1,5 +1,5 @@
 {{- if .Values.serviceMonitor.enabled }}
-{{- range $k, $v := .Values.exporter -}}
+{{- range $k, $v := .Values.exporter }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -10,7 +10,7 @@ metadata:
   {{- end }}
   labels:
     chart: {{ template "prometheus-aerospike-exporter.chart" $ }}
-    app: {{ template "prometheus-aerospike-exporter.name" $ }}
+    app: {{ include "prometheus-aerospike-exporter.fullname" $ }}-{{ $v.name }}
     release: "{{ $.Release.Name }}"
     heritage: "{{ $.Release.Service }}"
     {{- if $.Values.serviceMonitor.labels }}
@@ -37,7 +37,7 @@ spec:
   jobLabel: "{{ $.Release.Name }}"
   selector:
     matchLabels:
-      app: {{ template "prometheus-aerospike-exporter.name" $ }}
+      app: {{ include "prometheus-aerospike-exporter.fullname" $ }}-{{ $v.name }}
       release: "{{ $.Release.Name }}"
   namespaceSelector:
     matchNames:

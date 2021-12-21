@@ -7,6 +7,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
   labels:
     {{- include "prometheus-aerospike-exporter.labels" $ | nindent 4 }}
+    app: {{ include "prometheus-aerospike-exporter.fullname" $ }}-{{ $v.name }}
 data:
   ape.toml: |
     [Agent]
