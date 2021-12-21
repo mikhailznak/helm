@@ -1,0 +1,57 @@
+# Default values for prometheus-aerospike-exporter.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+exporter:
+  aerospikeNode: ""
+  aerospikePort: 3000
+  namespaceMetricsAllowlist: ""
+  setMetricsAllowlist: ""
+  nodeMetricsAllowlist: ""
+
+replicaCount: 1
+
+image:
+  repository: aerospike/aerospike-prometheus-exporter
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 9145
+  metricsPort:
+    name: aerospike-exporter
+
+web:
+  path: metrics
+
+serviceMonitor:
+  enabled: false
+  labels: {}
+  interval: 10s
+  scrapeTimeout: 10s
+  scheme: http
+  relabelings: []
+  targetLabels: []
+  metricRelabelings: []
+  sampleLimit: 0
+
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "prometheus-aerospike-exporter.fullname" . }}
+  labels:
+    {{- include "prometheus-aerospike-exporter.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type | default "ClusterIP"}}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 9145
+      protocol: TCP
+      name: {{ .Values.service.metricsPort.name }}
+  selector:
+    {{- include "prometheus-aerospike-exporter.selectorLabels" . | nindent 4 }}
